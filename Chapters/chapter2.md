@@ -118,19 +118,19 @@ Now we can create the controller, lets type the following code:
 
 module.exports = {
     getTodos: (req, res) => {
-        console.log('Getting all the todos');
+        res.json({ message: 'Getting all the todos' });
     },
     getTodo: (req, res) => {
-        console.log('Getting one todo');
+        res.json({ message: 'Getting one todo' });
     },
     createTodo: (req, res) => {
-        console.log('Creating one todo');
+        res.json({ message: 'Creating one todo' });
     },
     updateTodo: (req, res) => {
-        console.log('Updating todo');
+        res.json({ message: 'Updating todo' });
     },
     deleteTodo: (req, res) => {
-        console.log('Deleting todo');
+        res.json({ message: 'Deleting todo' });
     }
 };
 
@@ -138,7 +138,22 @@ module.exports = {
 
 Here we are exporting one module that contains all the functions we can use in our todos routes module.
 
-Now if we run node server again and make requests to http://localhost:3050/todos, we should see the logs in the command promt.
+The only thing remaining is update our routes module:
+
+```
+
+var express = require('express');
+var router  = express.Router();
+
+var TodosRoutes = require('./todos');
+
+router.use('/users', TodosRoutes);
+
+module.exports = router;
+
+```
+
+Now if we run node server again and make requests to http://localhost:3050/todos, we should see the messages in the response.
 
 In the next chapter we will cover how to connect to the mongo database and how to create the todo model and start modifing them.
 

@@ -54,4 +54,4 @@ In first two lines we are importing the express framework and we are creating an
 
 Then we are telling to the express app to use the port 3050.
 
-Now we can run ```node server``` and go to http://localhost:3050/api/ to see it working.
+Now we can run ```node server``` and go to http://localhost:3050/api/ to see it working, if everything is working fine we can see in our browser the json message from our api.

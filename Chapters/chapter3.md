@@ -54,7 +54,7 @@ console.log('Api listening on port 3050');
 
 Here we imported mongoose to our server and then created the mongoose connection, the ```mongoose.connect``` command accepts the mongodb url as parameter, for now we are using our local mongo database but we can use one in another server, then we are telling mongo that we are using the database mean-class. 
 
-Also we have imported another package, the bodyParser package, it will help us to translate the requests so we can handle them easily.
+Also we have imported another package, the bodyParser package, it will help us to translate the requests so we can handle them easily, lets install it typing on our command promt ```npm install --save body-parser```.
 
 ## getTodos route
 
@@ -112,7 +112,7 @@ Again mongoose makes everything easy for us, we only have to use the save method
 
 ```javascript
 
-createTodo: (req, res) {
+createTodo: (req, res) => {
     var todo = new Todo(req.body);
 
     todo.save((err) => {

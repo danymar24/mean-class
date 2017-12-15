@@ -1,17 +1,50 @@
+var Todo = require('./todoModel');
+
 module.exports = {
     getTodos: (req, res) => {
-        res.json({ message: 'Getting all the todos' });
+        Todo.find((err, todos) => {
+            if (err) return res.status(404).send(err);
+
+            return res.json(todos);
+        });
     },
     getTodo: (req, res) => {
-        res.json({ message: 'Getting one todo' });
+        Todo.findById(req.params.id, (err, todo) => {
+            if (err) return res.status(404).send(err);
+
+            return res.json(todo);
+        });
     },
     createTodo: (req, res) => {
-        res.json({ message: 'Creating one todo' });
+        var todo = new Todo(req.body);
+
+        todo.save((err) => {
+            if (err) return res.send(err);
+
+            return res.json({ message: 'Todo created' });
+        });
     },
     updateTodo: (req, res) => {
-        res.json({ message: 'Updating todo' });
+        Todo.findById(req.params.id, (err, todo) => {
+            if (err) return res.send(err);
+
+            todo.text = req.body.text;
+            todo.done = req.body.done;
+
+            todo.save((err) => {
+                if (err) return res.send(err);
+
+                res.json({ message: 'Todo updated' });
+            });
+        });
     },
     deleteTodo: (req, res) => {
-        res.json({ message: 'Deleting todo' });
+        Todo.remove({
+            _id: req.params.id
+        }, (err, todo) => {
+            if (err) return res.send(err);
+
+            return res.json({ message: 'Todo deleted' });
+        });
     }
 };

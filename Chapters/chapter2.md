@@ -51,9 +51,9 @@ Now delete the route of the server.js file and include our new module.
 var express     = require('express');
 var app = express();
 
-var Routes = require('./routes');
+var Routes = require('./routes'); // New Line
 
-app.use('/api', Routes);
+app.use('/api', Routes);          // New Line
 
 app.listen(3050);
 console.log('Api listening on port 3050');
@@ -140,14 +140,14 @@ Here we are exporting one module that contains all the functions we can use in o
 
 The only thing remaining is update our routes module:
 
-```
+```javascript
 
 var express = require('express');
 var router  = express.Router();
 
-var TodosRoutes = require('./todos');
+var TodosRoutes = require('./todos'); // New Line
 
-router.use('/users', TodosRoutes);
+router.use('/todos', TodosRoutes);    // New Line
 
 module.exports = router;
 

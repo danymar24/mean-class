@@ -3,6 +3,6 @@ var router  = express.Router();
 
 var TodosRoutes = require('./todos');
 
-router.use('/users', TodosRoutes);
+router.use('/todos', TodosRoutes);
 
 module.exports = router;

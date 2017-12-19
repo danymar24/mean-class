@@ -15,7 +15,7 @@ export class AddTodoComponent implements OnInit {
   }
 
   save(todoForm: NgForm) {
-    this.http.post('http:localhost:3050/api/users',
+    this.http.post('/api/todos',
                    todoForm.form.value)
              .subscribe(res => {
                console.log(res);

@@ -1,3 +1,31 @@
-<p>
-  add-todo works!
-</p>
+<form #todoForm="ngForm"
+      (ngSubmit)="save(todoForm)">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="form-group">
+        <input type="text" 
+               class="form-control"
+               type="text"
+               name="text"
+               ngModel>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <div class="form-check">
+        <div class="form-check-label">
+          <input type="checkbox" 
+                 class="form-check-input"
+                 name="done"
+                 ngModel>
+            Done
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-primary"
+              type="submit">
+        Save
+      </button>
+    </div>
+  </div>    
+</form>

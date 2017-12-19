@@ -123,7 +123,7 @@ Now in the component file we can call to the http.post method lets write the nex
 ```javascript
 
 save(todoForm: NgForm) {
-    this.http.post('http://localhost:3050/api/users', todoForm.form.value)
+    this.http.post('http://localhost:3050/api/todos', todoForm.form.value)
              .subscribe(res => {
                 console.log(res);    
              };
@@ -137,7 +137,7 @@ The angular POST method accepts 2 parameters, the url and the data we want to se
 
 We have to subscribe to the response, that is why we call the subscribe function and pass the response as callback.
 
-But here we have a problem, when we try to send information to our api in the browser console we get a 404 (not found) error, if we look for the reason of the error we are going to find that angular is trying to send information to: ```http://localhost:4200/localhost:3050/api/users```, that is because we have two different apps in two different ports, our api is running in port 3050 and the angular app is running on the port 4200, we can fix this issue adding a proxy to our application lets create a proxy for it.
+But here we have a problem, when we try to send information to our api in the browser console we get a 404 (not found) error, if we look for the reason of the error we are going to find that angular is trying to send information to: ```http://localhost:4200/localhost:3050/api/todos```, that is because we have two different apps in two different ports, our api is running in port 3050 and the angular app is running on the port 4200, we can fix this issue adding a proxy to our application lets create a proxy for it.
 
 ## Proxy
 
@@ -164,7 +164,7 @@ In the angular package.json file we can add this code:
 
 "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-conf proxy.conf.json", // Modified line
+    "start": "ng serve --proxy-config proxy.conf.json", // Modified line
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -172,6 +172,18 @@ In the angular package.json file we can add this code:
   },
 
 ```
+
+Then we have to change our post method like this:
+```javascript
+
+save(todoForm: NgForm) {
+    this.http.post('/api/todos', todoForm.form.value)
+             .subscribe(res => {
+                console.log(res);    
+             };
+}
+
+``` 
 
 Now run the app with ```npm start``` and try adding a new todo.
 

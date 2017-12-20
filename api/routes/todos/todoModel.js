@@ -2,7 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TodoSchema = new Schema({
-    text: String,
+    text: {
+        type: String,
+        required: true
+    },
     done: Boolean
 });
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-todos',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListTodosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+  todos: any;
 
   ngOnInit() {
+    this.http.get('/api/todos').subscribe(res => {
+      this.todos = res;
+      console.log(res);
+    });
   }
 
 }

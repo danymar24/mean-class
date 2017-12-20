@@ -60,7 +60,7 @@ export class AddTodoComponent implements OnInit {
   ngOnInit() {
   }
 
-  save(userForm: NgForm) {              // New lines
+  save(todoForm: NgForm) {              // New lines
       console.log('Form submitted');
   }
 
@@ -123,7 +123,7 @@ Now in the component file we can call to the http.post method lets write the nex
 ```javascript
 
 save(todoForm: NgForm) {
-    this.http.post('http://localhost:3050/api/users', todoForm.form.value.name)
+    this.http.post('http://localhost:3050/api/todos', todoForm.form.value)
              .subscribe(res => {
                 console.log(res);    
              };
@@ -136,3 +136,57 @@ Here we are passing a NfForm type form to the save function, we can get the valu
 The angular POST method accepts 2 parameters, the url and the data we want to send to the api.
 
 We have to subscribe to the response, that is why we call the subscribe function and pass the response as callback.
+
+But here we have a problem, when we try to send information to our api in the browser console we get a 404 (not found) error, if we look for the reason of the error we are going to find that angular is trying to send information to: ```http://localhost:4200/localhost:3050/api/todos```, that is because we have two different apps in two different ports, our api is running in port 3050 and the angular app is running on the port 4200, we can fix this issue adding a proxy to our application lets create a proxy for it.
+
+## Proxy
+
+Webpack dev server has support of a proxy, with this we can highjack certain URLs and send them to another url, we need to create a file called proxy.conf.json in our angular folder:
+
+```json
+
+{
+    "/api": {
+        "target": "http://localhost:3050",
+        "secure": false
+    }
+}
+
+```
+
+With this file we can forward all the api calls to the server where our api is running, in this case ```http://localhost:3050```.
+
+Now we will have to run our application, but this time we will run it with the command ```ng serve --proxy-conf proxy.conf.json``` to make things easier we can add this command to the angular package.json as a script.
+
+In the angular package.json file we can add this code:
+
+```json
+
+"scripts": {
+    "ng": "ng",
+    "start": "ng serve --proxy-config proxy.conf.json", // Modified line
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+
+```
+
+Then we have to change our post method like this:
+```javascript
+
+save(todoForm: NgForm) {
+    this.http.post('/api/todos', todoForm.form.value)
+             .subscribe(res => {
+                console.log(res);    
+             };
+}
+
+``` 
+
+Now run the app with ```npm start``` and try adding a new todo.
+
+If everything is working fine we should see a new log in the browser console showing the response message from the api.
+
+Continue to (chapter 8)[chapter8.md].

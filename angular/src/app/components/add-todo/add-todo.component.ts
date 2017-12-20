@@ -15,11 +15,6 @@ export class AddTodoComponent implements OnInit {
   ngOnInit() {
   }
 
-  pushAlert() {
-    this.alertsService.pushAlert('success');
-    console.log(this.alertsService.alerts);
-  }
-
   save(todoForm: NgForm) {
     this.http.post('/api/todos',
                    todoForm.form.value)

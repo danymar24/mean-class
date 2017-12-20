@@ -1,6 +1,12 @@
 <div class="container">
     <h1>Todos list</h1>
-    
+    <div *ngFor="let alert of alerts">
+        <alert [type]="alert.type" 
+               [dismissible]="true"
+               dismissOnTimeout="5000"> 
+            <span [innerHtml]="alert.message"></span>
+        </alert>
+    </div>
     <app-add-todo></app-add-todo>
     <app-list-todos></app-list-todos>
 </div>

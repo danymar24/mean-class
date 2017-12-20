@@ -4,6 +4,8 @@ import { AlertModule, AccordionModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AlertsService } from './services/alerts.service';
+
 import { AppComponent } from './app.component';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { ListTodosComponent } from './components/list-todos/list-todos.component';
@@ -22,7 +24,7 @@ import { ListTodosComponent } from './components/list-todos/list-todos.component
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AlertsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

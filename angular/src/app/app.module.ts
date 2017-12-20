@@ -9,6 +9,7 @@ import { AlertsService } from './services/alerts.service';
 import { AppComponent } from './app.component';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { ListTodosComponent } from './components/list-todos/list-todos.component';
+import { TodosService } from './services/todos.service';
 
 
 @NgModule({
@@ -24,7 +25,10 @@ import { ListTodosComponent } from './components/list-todos/list-todos.component
     FormsModule,
     HttpClientModule
   ],
-  providers: [AlertsService],
+  providers: [
+    AlertsService,
+    TodosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

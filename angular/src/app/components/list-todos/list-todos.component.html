@@ -1,9 +1,11 @@
 <div class="row">
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let todo of todos | orderBy: 'createdAt': 'desc'">
+    <li class="list-group-item" *ngFor="let todo of todos | orderBy: 'createdAt': 'desc'; let i = index">
+      <button class="btn btn-danger btn-small float-right" 
+              (click)="deleteTodo(todo._id, i)">Delete</button>
       <span [innerHtml]="todo.text"></span>
-      <span class="badge badge-primary float-right" *ngIf="todo.done">Done</span>
-      <span class="badge badge-secondary float-right" *ngIf="!todo.done">Not done</span>
+      <span class="badge badge-primary float-right badge-pill" *ngIf="todo.done">Done</span>
+      <span class="badge badge-secondary float-right badge-pill" *ngIf="!todo.done">Not done</span>
     </li>
   </ul>
 </div>

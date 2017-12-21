@@ -13,4 +13,8 @@ export class TodosService {
   pushTodo(todo) {
     this.todos.push(todo);
   }
+
+  removeTodo(index) {
+    this.todos.splice(index, 1);
+  }
 }

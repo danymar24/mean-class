@@ -6,7 +6,11 @@ var TodoSchema = new Schema({
         type: String,
         required: true
     },
-    done: Boolean
+    done: Boolean,
+    createdAt: {
+        type: Date,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Todo', TodoSchema);

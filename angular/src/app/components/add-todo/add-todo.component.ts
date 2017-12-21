@@ -23,7 +23,7 @@ export class AddTodoComponent implements OnInit {
                    todoForm.form.value)
              .subscribe(res => {
                this.alertsService.pushAlert(res);
-               this.todosService.pushTodo(todoForm.form.value);
+               this.todosService.pushTodo(res['created']);
                todoForm.reset();
              }, err => {
                this.alertsService.pushAlert(err);

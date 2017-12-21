@@ -16,7 +16,6 @@ export class ListTodosComponent implements OnInit {
     this.http.get('/api/todos').subscribe(res => {
       this.todosService.setTodos(res);
       this.todos = res;
-      console.log(this.todosService.todos);
     });
   }
 

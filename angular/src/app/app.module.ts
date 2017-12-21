@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { ListTodosComponent } from './components/list-todos/list-todos.component';
 import { TodosService } from './services/todos.service';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTodoComponent,
-    ListTodosComponent
+    ListTodosComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ var Todo = require('./todoModel');
 
 module.exports = {
     getTodos: (req, res) => {
-        Todo.find((err, todos) => {
+        Todo.find().sort('-createdAt').exec((err, todos) => {
             if (err) return res.status(404).send(err);
 
             return res.json(todos);
@@ -16,12 +16,13 @@ module.exports = {
         });
     },
     createTodo: (req, res) => {
+        req.body.createdAt = new Date();
         var todo = new Todo(req.body);
 
-        todo.save((err) => {
+        todo.save((err, created) => {
             if (err) return res.send(err);
-
-            return res.json({ message: 'Todo created' });
+            
+            return res.json({ message: 'Todo created', created: created });
         });
     },
     updateTodo: (req, res) => {
